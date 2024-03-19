@@ -152,7 +152,7 @@ window.document.addEventListener("DOMContentLoaded", function () {
     const topOffset = headerOffset();
     const bodyOffset = topOffset + footerOffset() + dashboardOffset();
     const bodyEl = window.document.body;
-    const contentOffset = contentOffset();
+    const contentOffset = mainContentOffset();
     console.log("topOffset = " + topOffset);
     console.log("bodyOffset = " + bodyOffset);
     console.log("bodyEl = " + bodyEl);
@@ -178,7 +178,7 @@ window.document.addEventListener("DOMContentLoaded", function () {
         sidebar.style.maxHeight = "100vh";
       } else {
         sidebar.style.top = topOffset + "px";
-        sidebar.style.maxHeight = "calc(100vh - " + topOffset + "px)";
+        sidebar.style.maxHeight = "calc(100vh - " + contentOffset + "px)";
       }
     });
 
@@ -214,6 +214,11 @@ window.document.addEventListener("DOMContentLoaded", function () {
     }
     init = true;
   }
+
+  window.addEventListener("scroll", () => {
+    updateDocumentOffset(false);
+  }
+  )
 
   // initialize headroom
   var header = window.document.querySelector("#quarto-header");
