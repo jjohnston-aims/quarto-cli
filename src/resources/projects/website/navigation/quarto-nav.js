@@ -131,6 +131,17 @@ window.document.addEventListener("DOMContentLoaded", function () {
       return 0;
     }
   }
+  
+  function mainContentOffset() {
+    const contentEl = window.document.getElementById(
+      "quarto-content"
+    );
+    if (contentEl) {
+      return contentEl.getBoundingClientRect().top;
+    } else {
+      return 0;
+    }
+  }
 
   function updateDocumentOffsetWithoutAnimation() {
     updateDocumentOffset(false);
@@ -141,6 +152,11 @@ window.document.addEventListener("DOMContentLoaded", function () {
     const topOffset = headerOffset();
     const bodyOffset = topOffset + footerOffset() + dashboardOffset();
     const bodyEl = window.document.body;
+    const contentOffset = contentOffset();
+    console.log("topOffset = " + topOffset);
+    console.log("bodyOffset = " + bodyOffset);
+    console.log("bodyEl = " + bodyEl);
+    console.log("contentOffset = " + contentOffset);
     bodyEl.setAttribute("data-bs-offset", topOffset);
     bodyEl.style.paddingTop = topOffset + "px";
 
